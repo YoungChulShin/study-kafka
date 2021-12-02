@@ -1,6 +1,6 @@
-study/spring/kafka/SimpleProducer.java
- study.spring.kafka.SimpleProducer
-study/spring/kafka/ProducerCallback.java
- study.spring.kafka.ProducerCallback
 study/spring/kafka/KafkaClientProducer.java
  study.spring.kafka.KafkaClientProducer
+study/spring/kafka/ProducerCallback.java
+ study.spring.kafka.ProducerCallback
+study/spring/kafka/SimpleProducer.java
+ study.spring.kafka.SimpleProducer

@@ -12,7 +12,9 @@ public class ProducerCallback implements Callback {
   @Override
   public void onCompletion(RecordMetadata metadata, Exception exception) {
     if (exception == null) {
-      logger.info(metadata.toString());
+      logger.info("Success. Topic: " + metadata.topic() +
+          ", Partition: " + metadata.partition() +
+          ", Offset: " + metadata.offset());
     } else {
       logger.error(exception.getMessage(), exception);
     }
