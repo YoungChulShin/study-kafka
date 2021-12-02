@@ -1,0 +1,2 @@
+study/spring/kafka/KafkaClientConsumer.java
+ study.spring.kafka.KafkaClientConsumer
