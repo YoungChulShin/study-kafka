@@ -17,6 +17,7 @@ public class KeyValueProducer {
     config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
     config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
     config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+    config.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, CustomPartitioner.class);
 
     try (KafkaProducer<String, String> producer = new KafkaProducer<>(config)) {
       String messageKey = "testKey4";
