@@ -1,7 +1,10 @@
 import java.util.Properties;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,9 +26,14 @@ public class KeyValueProducer {
       String messageKey = "testKey4";
       String messageValue = "testMessage4";
       ProducerRecord<String, String> record = new ProducerRecord<>(TOPIC_NAME, messageKey, messageValue);
-      producer.send(record);
-      logger.info("{}", record);
+      logger.info("전송 데이터 - {}", record);
+      RecordMetadata recordMetadata = producer.send(record).get();
+      logger.info("전송 응답 - {}", recordMetadata);
       producer.flush();
+    } catch (ExecutionException e) {
+      throw new RuntimeException(e);
+    } catch (InterruptedException e) {
+      throw new RuntimeException(e);
     }
   }
 }
