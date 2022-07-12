@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 import org.apache.kafka.clients.producer.KafkaProducer;
@@ -22,8 +23,9 @@ public class KeyValueProducerWithCallback {
     config.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, CustomPartitioner.class);
 
     try (KafkaProducer<String, String> producer = new KafkaProducer<>(config)) {
-      String messageKey = "testKey4";
-      String messageValue = "testMessage4";
+      String timeString = LocalDateTime.now().toString();
+      String messageKey = "testKey:" + timeString;
+      String messageValue = "testMessage" + timeString;
       ProducerRecord<String, String> record = new ProducerRecord<>(TOPIC_NAME, messageKey,
           messageValue);
       logger.info("전송 데이터 - {}", record);
