@@ -1,11 +1,15 @@
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.clients.consumer.OffsetAndMetadata;
+import org.apache.kafka.clients.consumer.OffsetCommitCallback;
+import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +37,18 @@ public class AsyncCommitConsumer {
       for (ConsumerRecord<String, String> record : records) {
         logger.info("message key: {}, value: {}", record.key(), record.value());
       }
-      consumer.commitAsync();
+      consumer.commitAsync(new OffsetCommitCallback() {
+        @Override
+        public void onComplete(
+            Map<TopicPartition, OffsetAndMetadata> offsets,
+            Exception exception) {
+          if (exception != null) {
+            logger.info("커밋 실패");
+          } else {
+            logger.info("커밋 성공");
+          }
+        }
+      });
     }
   }
 
