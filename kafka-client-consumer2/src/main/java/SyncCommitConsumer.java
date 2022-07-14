@@ -2,10 +2,12 @@
 import java.time.Duration;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +17,7 @@ public class SyncCommitConsumer {
   private final static Logger logger = LoggerFactory.getLogger(SyncCommitConsumer.class);
   private final static String TOPIC_NAME = "test";
   private final static String BOOTSTRAP_SERVERS = "localhost:19092,localhost:29092,localhost:39092";
-  private final static String GROUP_ID = "test-group2";
+  private final static String GROUP_ID = "test-group3";
 
   public static void main(String[] args) {
     Properties config = new Properties();
@@ -34,6 +36,11 @@ public class SyncCommitConsumer {
         logger.info("message key: {}, value: {}", record.key(), record.value());
       }
       consumer.commitSync();
+
+      Set<TopicPartition> assignment2 = consumer.assignment();
+      if (assignment2.size() != 0) {
+        logger.info("토픽 할당");
+      }
     }
   }
 
