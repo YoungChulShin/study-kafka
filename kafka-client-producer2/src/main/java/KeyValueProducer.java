@@ -23,8 +23,8 @@ public class KeyValueProducer {
     config.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, CustomPartitioner.class);
 
     try (KafkaProducer<String, String> producer = new KafkaProducer<>(config)) {
-      String messageKey = "testKey4";
-      String messageValue = "testMessage4";
+      String messageKey = "testKey5";
+      String messageValue = "testMessage6";
       ProducerRecord<String, String> record = new ProducerRecord<>(TOPIC_NAME, messageKey, messageValue);
       logger.info("전송 데이터 - {}", record);
       RecordMetadata recordMetadata = producer.send(record).get();
