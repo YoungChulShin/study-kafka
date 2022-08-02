@@ -1,12 +1,12 @@
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MultiThreadConsumerWorker implements Runnable{
+public class MultiWorkerConsumerWorker implements Runnable{
 
-  private static final Logger logger = LoggerFactory.getLogger(MultiThreadConsumerWorker.class);
+  private static final Logger logger = LoggerFactory.getLogger(MultiWorkerConsumerWorker.class);
   private final String readValue;
 
-  public MultiThreadConsumerWorker(String readValue) {
+  public MultiWorkerConsumerWorker(String readValue) {
     this.readValue = readValue;
   }
 
