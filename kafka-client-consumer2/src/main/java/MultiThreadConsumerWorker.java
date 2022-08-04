@@ -29,7 +29,7 @@ public class MultiThreadConsumerWorker implements Runnable {
     while (true) {
       ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(10));
       for (ConsumerRecord<String, String> record : records) {
-        logger.info("{} - {}", threadName, record.value());
+        logger.info("{} - {} - {}", threadName, record.key(), record.value());
       }
     }
   }
