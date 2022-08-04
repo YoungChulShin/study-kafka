@@ -1,13 +1,12 @@
-package study.kafka.kafkaspringproducer2;
+package study.kafka.default_template_producer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class KafkaSpringProducer2Application {
+public class DefaultTemplateProducerApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(KafkaSpringProducer2Application.class, args);
+    SpringApplication.run(DefaultTemplateProducerApplication.class, args);
   }
-
 }
