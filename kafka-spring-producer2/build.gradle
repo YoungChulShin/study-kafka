@@ -22,3 +22,12 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+task down(type:Exec) {
+    commandLine '/usr/local/bin/docker-compose', '-f', 'docker/docker-compose.yml', 'down'
+}
+
+task up(type:Exec) {
+    dependsOn(down)
+    commandLine '/usr/local/bin/docker-compose', '-f', 'docker/docker-compose.yml', 'up', '-d'
+}
