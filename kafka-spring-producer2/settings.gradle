@@ -1,3 +1,4 @@
 rootProject.name = 'kafka-spring-producer2'
 include 'default-template-producer'
+include 'custom-template-producer'
 
