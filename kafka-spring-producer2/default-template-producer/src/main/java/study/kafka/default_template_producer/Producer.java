@@ -32,7 +32,7 @@ public class Producer implements CommandLineRunner {
           System.out.println("Send-Success: " + result.getProducerRecord().value());
         }
       });
-      Thread.sleep(500);
+      Thread.sleep(1);
     }
   }
 }

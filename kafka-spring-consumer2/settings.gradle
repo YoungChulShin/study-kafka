@@ -1,3 +1,4 @@
 rootProject.name = 'kafka-spring-consumer2'
 include 'record-consumer'
+include 'batch-consumer'
 
