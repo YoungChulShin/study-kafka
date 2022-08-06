@@ -1,0 +1,6 @@
+spring:
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:19092,localhost:29092,localhost:39092
+    listener:
+      type: single  # 레코드 타입의 리스너 구현

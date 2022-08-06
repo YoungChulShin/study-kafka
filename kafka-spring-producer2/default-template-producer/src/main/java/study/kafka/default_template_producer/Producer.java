@@ -11,7 +11,7 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 @Component
 public class Producer implements CommandLineRunner {
 
-  private static final String TOPIC_NAME = "multi-thread-test2";
+  private static final String TOPIC_NAME = "test";
 
   @Autowired
   private KafkaTemplate<String, String> template;
