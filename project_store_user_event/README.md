@@ -16,3 +16,8 @@ brew install hadoop elasticsearch kibana
     </property>
 </configuration>
 ```
+
+# 토픽 생성
+```
+./kafka-topics.sh --create --bootstrap-server localhost:19092 --replication-factor 2 --partitions 3 --topic select-color
+```
