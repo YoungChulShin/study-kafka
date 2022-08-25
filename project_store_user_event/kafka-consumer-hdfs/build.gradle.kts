@@ -12,6 +12,10 @@ repositories {
 }
 
 dependencies {
+    implementation("org.slf4j:slf4j-simple:2.0.0")
+    implementation("org.apache.kafka:kafka-clients:3.2.1")
+    implementation("org.apache.hadoop:hadoop-client:3.3.4")
+
     testImplementation(kotlin("test"))
 }
 
