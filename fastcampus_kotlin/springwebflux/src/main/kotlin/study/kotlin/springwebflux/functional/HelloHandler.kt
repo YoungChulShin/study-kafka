@@ -1,4 +1,4 @@
-package study.kotlin.springwebflux
+package study.kotlin.springwebflux.functional
 
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.ServerRequest

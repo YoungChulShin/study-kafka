@@ -1,4 +1,4 @@
-package study.kotlin.springwebflux
+package study.kotlin.springwebflux.functional
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
