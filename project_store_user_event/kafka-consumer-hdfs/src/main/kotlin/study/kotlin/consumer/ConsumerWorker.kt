@@ -1,5 +1,9 @@
 package study.kotlin.consumer
 
+import org.apache.commons.lang3.StringUtils
+import org.apache.hadoop.conf.Configuration
+import org.apache.hadoop.fs.FileSystem
+import org.apache.hadoop.fs.Path
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.apache.kafka.clients.consumer.KafkaConsumer
 import org.apache.kafka.common.TopicPartition
@@ -63,7 +67,7 @@ class ConsumerWorker(
         bufferString[record.partition()] = buffer
         // 첫번째 버퍼라면 오프셋을 저장한다
         if (buffer.size == 1) {
-            currentFileOffset.put(record.partition(), record.offset())
+            currentFileOffset[record.partition()] = record.offset()
         }
     }
 
@@ -79,7 +83,35 @@ class ConsumerWorker(
         }
     }
 
-    private fun save(partionNo: Int) {
+    private fun save(partitionNo: Int) {
+        if (bufferString.getOrDefault(partitionNo, 0) == 0) {
+            return
+        }
 
+        try {
+            // 하둡에 데이터 전송
+            val fileName = "/data/color-${partitionNo}-${currentFileOffset[partitionNo]}.log"
+            val configuration = Configuration()
+            configuration.set("fs.defaultFS", "hdfs://localhost:9000")
+            val hdfsFileSystem = FileSystem.get(configuration)
+            val fileOutputStream = hdfsFileSystem.create(Path(fileName))
+            fileOutputStream.writeBytes(StringUtils.join(bufferString.get(partitionNo), "\n"))
+            fileOutputStream.close()
+
+            // 버퍼 초기화
+            bufferString.put(partitionNo, mutableListOf())
+        } catch (e: Exception) {
+            logger.error(e.message, e)
+        }
+    }
+
+    private fun saveRemainBufferToHdfsFile() {
+        bufferString.forEach { save(it.key) }
+    }
+
+    fun stopAndWakeup() {
+        logger.info("stopAndWakeup")
+        consumer.wakeup()
+        saveRemainBufferToHdfsFile()
     }
 }
