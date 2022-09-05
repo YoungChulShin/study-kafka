@@ -25,3 +25,9 @@ order_join topic 생성
 ```
 ./kafka-topics.sh --create --topic order_join --partitions 3 --bootstrap-server localhost:19092
 ```
+
+## StreamdGlobalJoinApplication
+파티션 정보가 다른 address_v2 생성
+```
+./kafka-topics.sh --create --topic address_v2 --partitions 2 --bootstrap-server localhost:19092
+```
