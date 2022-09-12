@@ -1,4 +1,4 @@
-package study.kafka.order.application.model
+package study.kafka.order.domain.model
 
 import study.kafka.order.domain.Order
 import study.kafka.order.domain.OrderStatus

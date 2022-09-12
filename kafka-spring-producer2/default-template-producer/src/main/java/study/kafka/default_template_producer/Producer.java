@@ -21,7 +21,7 @@ public class Producer implements CommandLineRunner {
     for (int i = 0; i < 100; i++) {
       System.out.println("Send-Start: " + i);
       ListenableFuture<SendResult<String, String>> ack = template.send(TOPIC_NAME, "test" + i);
-      ack.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
+      ack.addCallback(new ListenableFutureCallback<>() {
         @Override
         public void onFailure(Throwable ex) {
           System.out.println("Send-Fail: " + ex.getMessage());

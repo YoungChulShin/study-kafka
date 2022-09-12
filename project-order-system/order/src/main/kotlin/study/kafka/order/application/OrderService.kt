@@ -3,7 +3,7 @@ package study.kafka.order.application
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import study.kafka.order.application.model.OrderInfo
+import study.kafka.order.domain.model.OrderInfo
 import study.kafka.order.domain.Order
 import study.kafka.order.domain.OrderRepository
 import study.kafka.order.domain.events.OrderCreated

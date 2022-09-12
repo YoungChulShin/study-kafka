@@ -1,6 +1,6 @@
 package study.kafka.order.web.model
 
-import study.kafka.order.application.model.OrderInfo
+import study.kafka.order.domain.model.OrderInfo
 
 data class CreateOrderRequest(
     val menu: String,

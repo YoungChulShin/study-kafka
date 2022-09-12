@@ -11,7 +11,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import study.kafka.order.application.OrderService
-import study.kafka.order.application.model.OrderInfo
+import study.kafka.order.domain.model.OrderInfo
 import study.kafka.order.domain.OrderStatus
 import study.kafka.order.web.model.CreateOrderRequest
 
