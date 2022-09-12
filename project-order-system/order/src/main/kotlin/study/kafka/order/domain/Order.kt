@@ -30,4 +30,13 @@ class Order(
 
         this.status = OrderStatus.CANCELLED
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        return id == (other as Order).id
+    }
+
+    override fun hashCode() = id?.hashCode() ?: 0
 }
