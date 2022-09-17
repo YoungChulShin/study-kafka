@@ -11,7 +11,7 @@ import org.springframework.kafka.config.KafkaListenerContainerFactory
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer
 import org.springframework.kafka.listener.ContainerProperties
-import study.kafka.payment.intrastructure.receiver.OrderInfo
+import study.kafka.payment.presentation.message.OrderInfo
 
 @Configuration
 class KafkaConsumerConfig(

@@ -1,4 +1,4 @@
-package study.kafka.payment.intrastructure.receiver
+package study.kafka.payment.presentation.message
 
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.springframework.context.ApplicationEventPublisher
@@ -6,7 +6,7 @@ import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.stereotype.Component
 
 @Component
-class OrderReceiver(
+class OrderListener(
     private val eventPublisher: ApplicationEventPublisher
 ) {
 

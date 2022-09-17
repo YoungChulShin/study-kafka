@@ -1,4 +1,4 @@
-package study.kafka.payment.intrastructure.receiver
+package study.kafka.payment.presentation.message
 
 import java.time.LocalDateTime
 
