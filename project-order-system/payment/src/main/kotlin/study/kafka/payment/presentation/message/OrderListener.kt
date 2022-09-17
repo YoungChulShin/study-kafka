@@ -1,13 +1,13 @@
 package study.kafka.payment.presentation.message
 
 import org.apache.kafka.clients.consumer.ConsumerRecord
-import org.springframework.context.ApplicationEventPublisher
 import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.stereotype.Component
+import study.kafka.payment.application.PaymentService
 
 @Component
 class OrderListener(
-    private val eventPublisher: ApplicationEventPublisher
+    private val paymentService: PaymentService,
 ) {
 
     companion object {
@@ -21,7 +21,8 @@ class OrderListener(
         containerFactory = "orderCreatedContainerFactory"
     )
     fun orderCreatedListener(record: ConsumerRecord<String, OrderInfo>) {
-        println("이벤트 수신 - ${record.value()}")
-        eventPublisher.publishEvent(record.value())
+        val orderInfo = record.value()
+        println("이벤트 수신 - $orderInfo")
+        paymentService.createPayment(orderInfo.menu, orderInfo.price)
     }
 }

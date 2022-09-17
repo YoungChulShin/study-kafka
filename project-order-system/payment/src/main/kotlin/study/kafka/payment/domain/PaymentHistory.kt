@@ -7,7 +7,7 @@ import javax.persistence.*
 class PaymentHistory(
     val orderId: Long,
     val price: Int,
-    val menu: String
+    val menu: String,
 ) : BaseEntity() {
 
     @Id
