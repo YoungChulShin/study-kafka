@@ -17,7 +17,8 @@ class OrderReceiver(
 
     @KafkaListener(
         topics = [ORDER_CREATED_TOPIC],
-        groupId = ORDER_CREATED_GROUP_ID
+        groupId = ORDER_CREATED_GROUP_ID,
+        containerFactory = "orderCreatedContainerFactory"
     )
     fun orderCreatedListener(record: ConsumerRecord<String, OrderInfo>) {
         println("이벤트 수신 - ${record.value()}")
