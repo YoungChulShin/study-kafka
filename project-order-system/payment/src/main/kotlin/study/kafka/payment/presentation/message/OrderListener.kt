@@ -4,6 +4,7 @@ import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.stereotype.Component
 import study.kafka.payment.application.PaymentService
+import study.kafka.payment.application.model.CreatePaymentCommand
 
 @Component
 class OrderListener(
@@ -23,6 +24,12 @@ class OrderListener(
     fun orderCreatedListener(record: ConsumerRecord<String, OrderInfo>) {
         val orderInfo = record.value()
         println("이벤트 수신 - $orderInfo")
-        paymentService.createPayment(orderInfo.menu, orderInfo.price)
+        paymentService.createPayment(
+            CreatePaymentCommand(
+                orderInfo.id,
+                orderInfo.menu,
+                orderInfo.price
+            )
+        )
     }
 }

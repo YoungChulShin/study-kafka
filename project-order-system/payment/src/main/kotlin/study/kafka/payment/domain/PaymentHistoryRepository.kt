@@ -1,4 +1,5 @@
 package study.kafka.payment.domain
 
-interface PaymentHistoryRepository {
-}
+import org.springframework.data.jpa.repository.JpaRepository
+
+interface PaymentHistoryRepository : JpaRepository<PaymentHistory, Long>

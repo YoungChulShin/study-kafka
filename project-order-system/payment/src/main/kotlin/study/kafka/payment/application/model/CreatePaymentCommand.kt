@@ -1,4 +1,7 @@
 package study.kafka.payment.application.model
 
-class CreatePaymentCommand {
-}
+data class CreatePaymentCommand(
+    val orderId: Long,
+    val menu: String,
+    val price: Int
+)
