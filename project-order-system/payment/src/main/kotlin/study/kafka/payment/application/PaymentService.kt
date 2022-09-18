@@ -28,10 +28,10 @@ class PaymentService(
         )
         paymentHistoryRepository.save(paymentHistory)
         publishPaymentResultEvent(
-            id = paymentHistory.id!!,
+            id = paymentHistory.id ?: 0,
             orderId = paymentHistory.orderId,
             success = paymentHistory.success,
-            createdAt = paymentHistory.createdAt!!
+            createdAt = paymentHistory.createdAt ?: LocalDateTime.now()
         )
     }
 
