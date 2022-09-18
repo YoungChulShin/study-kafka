@@ -1,16 +1,20 @@
 package study.kafka.payment.application
 
+import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import study.kafka.payment.application.model.CreatePaymentCommand
 import study.kafka.payment.domain.PaymentHistory
 import study.kafka.payment.domain.PaymentHistoryRepository
 import study.kafka.payment.domain.PaymentRequester
+import study.kafka.payment.domain.events.PaymentFinished
+import java.time.LocalDateTime
 
 @Service
 class PaymentService(
     private val paymentRequester: PaymentRequester,
     private val paymentHistoryRepository: PaymentHistoryRepository,
+    private val eventPublisher: ApplicationEventPublisher,
 ) {
 
     @Transactional
@@ -20,16 +24,23 @@ class PaymentService(
             orderId = command.orderId,
             price = command.price,
             menu = command.menu,
-            result = paymentResult
+            success = paymentResult
         )
         paymentHistoryRepository.save(paymentHistory)
-
-        // 이벤트 발행
+        publishPaymentResultEvent(
+            id = paymentHistory.id!!,
+            orderId = paymentHistory.orderId,
+            success = paymentHistory.success,
+            createdAt = paymentHistory.createdAt!!
+        )
     }
 
-    private fun publishPaymentRequestResultEvent() {
-        // 타입
-        // 결과
-        //
+    private fun publishPaymentResultEvent(
+        id: Long,
+        orderId: Long,
+        success: Boolean,
+        createdAt: LocalDateTime,
+    ) {
+        eventPublisher.publishEvent(PaymentFinished(id, orderId, success, createdAt))
     }
 }

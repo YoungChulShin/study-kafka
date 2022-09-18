@@ -8,7 +8,7 @@ class PaymentHistory(
     val orderId: Long,
     val price: Int,
     val menu: String,
-    val result: Boolean,
+    val success: Boolean,
 ) : BaseEntity() {
 
     @Id
