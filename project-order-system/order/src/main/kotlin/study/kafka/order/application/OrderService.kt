@@ -24,16 +24,16 @@ class OrderService (
     }
 
     @Transactional
-    fun paymentCompleted(id: Long) {
+    fun updatePaymentResult(id: Long, success: Boolean) {
         val order = orderRepository.findById(id)
             .orElseThrow { IllegalArgumentException("오더 정보를 찾을 수 없습니다") }
-        order.paymentCompleted()
-    }
 
-    @Transactional
-    fun payment(id: Long) {
-        val order = orderRepository.findById(id)
-            .orElseThrow { IllegalArgumentException("오더 정보를 찾을 수 없습니다") }
-        order.cancelled()
+        if (success) {
+            order.paymentCompleted()
+            println("결제 결과 업데이트 - 성공");
+        } else {
+            order.cancelled()
+            println("결제 결과 업데이트 - 취소");
+        }
     }
 }
