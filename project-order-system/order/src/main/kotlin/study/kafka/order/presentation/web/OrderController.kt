@@ -1,11 +1,11 @@
-package study.kafka.order.web
+package study.kafka.order.presentation.web
 
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 import study.kafka.order.application.OrderService
-import study.kafka.order.web.model.CreateOrderRequest
-import study.kafka.order.web.model.CreateOrderResponse
+import study.kafka.order.presentation.web.model.CreateOrderRequest
+import study.kafka.order.presentation.web.model.CreateOrderResponse
 import javax.validation.Valid
 
 @RestController

@@ -1,8 +1,17 @@
 spring:
   kafka:
     bootstrap-servers: localhost:19092,localhost:29092,localhost:39092
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+      group-id: order-group-1
 
 transmitter:
   order:
     created:
       topic: "order-created"
+
+receiver:
+  payment:
+    finished:
+      topic: "order-payment-finished"

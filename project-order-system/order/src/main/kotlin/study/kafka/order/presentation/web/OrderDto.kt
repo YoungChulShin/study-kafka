@@ -1,4 +1,4 @@
-package study.kafka.order.web.model
+package study.kafka.order.presentation.web.model
 
 import study.kafka.order.domain.model.OrderInfo
 

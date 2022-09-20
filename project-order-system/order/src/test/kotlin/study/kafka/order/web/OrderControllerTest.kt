@@ -13,7 +13,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import study.kafka.order.application.OrderService
 import study.kafka.order.domain.model.OrderInfo
 import study.kafka.order.domain.OrderStatus
-import study.kafka.order.web.model.CreateOrderRequest
+import study.kafka.order.presentation.web.OrderController
+import study.kafka.order.presentation.web.model.CreateOrderRequest
 
 @WebMvcTest(OrderController::class)
 class OrderControllerTest(
