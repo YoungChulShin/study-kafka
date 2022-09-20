@@ -5,6 +5,8 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
       group-id: order-group-1
+  jpa:
+    show-sql: true
 
 transmitter:
   order:

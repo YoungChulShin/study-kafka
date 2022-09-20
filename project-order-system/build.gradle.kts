@@ -25,6 +25,7 @@ subprojects {
     apply(plugin = "kotlin-spring")
     apply(plugin = "io.spring.dependency-management")
     apply(plugin = "kotlin-kapt")
+    apply(plugin = "kotlin-jpa")
 
     dependencies {
 //        implementation("org.apache.kafka:kafka-streams")
@@ -54,5 +55,9 @@ subprojects {
 
     tasks.withType<Test> {
         useJUnitPlatform()
+    }
+
+    allOpen {
+        annotation("javax.persistence.Entity")
     }
 }
