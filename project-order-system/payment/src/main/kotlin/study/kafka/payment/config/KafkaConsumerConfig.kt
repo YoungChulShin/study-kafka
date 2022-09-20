@@ -1,7 +1,7 @@
 package study.kafka.payment.config
 
 import org.apache.kafka.clients.consumer.ConsumerConfig
-import org.apache.kafka.common.serialization.BytesDeserializer
+import org.apache.kafka.common.serialization.ByteArrayDeserializer
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
@@ -11,7 +11,6 @@ import org.springframework.kafka.config.KafkaListenerContainerFactory
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer
 import org.springframework.kafka.listener.ContainerProperties
-import study.kafka.payment.presentation.message.OrderInfo
 
 @Configuration
 class KafkaConsumerConfig(
@@ -19,16 +18,16 @@ class KafkaConsumerConfig(
 ) {
 
     @Bean
-    fun orderCreatedContainerFactory(): KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, OrderInfo>> {
+    fun orderCreatedContainerFactory(): KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, ByteArray>> {
         val properties = mapOf(
             ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG to bootstrapServers,
             ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG to StringDeserializer::class.java,
-            ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG to BytesDeserializer::class.java,
+            ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG to ByteArrayDeserializer::class.java,
         )
 
-        val consumerFactory = DefaultKafkaConsumerFactory<String, OrderInfo>(properties)
+        val consumerFactory = DefaultKafkaConsumerFactory<String, ByteArray>(properties)
 
-        val factory = ConcurrentKafkaListenerContainerFactory<String, OrderInfo>()
+        val factory = ConcurrentKafkaListenerContainerFactory<String, ByteArray>()
         factory.isBatchListener = false
         factory.containerProperties.ackMode = ContainerProperties.AckMode.RECORD
         factory.consumerFactory = consumerFactory

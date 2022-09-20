@@ -9,4 +9,8 @@ receiver:
   order:
     created:
       topic: "order-created"
-      group-id: "payment-group-1"
+
+transmitter:
+  payment:
+    finished:
+      topic: "order-payment-finished"
