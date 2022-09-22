@@ -1,19 +1,4 @@
-plugins {
-    id("java")
-}
-
-group = "study.kafka.order"
-version = "0.0.1-SNAPSHOT"
-
-repositories {
-    mavenCentral()
-}
 
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
-}
-
-tasks.getByName<Test>("test") {
-    useJUnitPlatform()
+    implementation("org.apache.kafka:kafka-streams:3.2.3")
 }
