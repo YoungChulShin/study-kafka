@@ -1,0 +1,7 @@
+
+stream:
+  config:
+    application-name: payment-monitoring-application
+    bootstrap-servers: "localhost:19092;localhost29092;localhost39093"
+    source-topic: order-payment-finished
+    filter-topic: order-payment-failed
