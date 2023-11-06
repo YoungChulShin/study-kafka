@@ -1,0 +1,38 @@
+version: "3"
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.5.1
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+  kafka1:
+    container_name: kafka1
+    image: confluentinc/cp-kafka:7.5.1
+    restart: on-failure
+    ports:
+      - "19092:19092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka1:9092,PLAINTEXT_HOST://localhost:19092
+    depends_on:
+      - zookeeper
+  init-kafka:
+    container_name: init-kafka
+    image: confluentinc/cp-kafka:7.5.1
+    depends_on:
+      - kafka1
+    entrypoint: ['/bin/sh', '-c']
+    command: |
+      "
+      # blocks until kafka is reachable
+      kafka-topics --bootstrap-server kafka1:9092 --list
+
+      echo -e 'Creating kafka topics'
+      kafka-topics --bootstrap-server kafka1:9092 --create --if-not-exists --topic test-topic --replication-factor 1 --partitions 1
+
+      echo -e 'Successfully created the following topics:'
+      kafka-topics --bootstrap-server kafka1:9092 --list
+      "
