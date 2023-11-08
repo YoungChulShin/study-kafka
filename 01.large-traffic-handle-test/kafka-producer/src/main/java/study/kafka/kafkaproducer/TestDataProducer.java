@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class TestDataProducer implements CommandLineRunner {
 
-  private final Integer TEST_COUNT = 10;
+  private final Integer TEST_COUNT = 1000;
   private final String TEST_TOPIC = "test-topic";
   private final KafkaTemplate<String, String> kafkaTemplate;
 

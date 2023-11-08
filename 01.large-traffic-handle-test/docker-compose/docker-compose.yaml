@@ -19,20 +19,21 @@ services:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka1:9092,PLAINTEXT_HOST://localhost:19092
     depends_on:
       - zookeeper
-  init-kafka:
-    container_name: init-kafka
-    image: confluentinc/cp-kafka:7.5.1
-    depends_on:
-      - kafka1
-    entrypoint: ['/bin/sh', '-c']
-    command: |
-      "
-      # blocks until kafka is reachable
-      kafka-topics --bootstrap-server kafka1:9092 --list
+  # init-kafka:
+  #   container_name: init-kafka
+  #   image: confluentinc/cp-kafka:7.5.1
+  #   depends_on:
+  #     - kafka1
+  #   entrypoint: ['/bin/sh', '-c']
+  #   command: |
+  #     "
+  #     # blocks until kafka is reachable
+  #     kafka-topics --bootstrap-server kafka1:9092 --list
 
-      echo -e 'Creating kafka topics'
-      kafka-topics --bootstrap-server kafka1:9092 --create --if-not-exists --topic test-topic --replication-factor 1 --partitions 1
+  #     echo -e 'Creating kafka topics'
+  #     kafka-topics --bootstrap-server kafka1:9092 --create --if-not-exists --topic test-topic --replication-factor 1 --partitions 1
 
-      echo -e 'Successfully created the following topics:'
-      kafka-topics --bootstrap-server kafka1:9092 --list
-      "
+  #     echo -e 'Successfully created the following topics:'
+  #     kafka-topics --bootstrap-server kafka1:9092 --list
+  #     "
+        

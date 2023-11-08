@@ -2,3 +2,12 @@ server:
   tomcat:
     threads:
       max: 100
+  port: 8089
+
+spring:
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:19092,localhost:29092,localhost:39092
+    listener:
+      type: single
+      ack-mode: record
