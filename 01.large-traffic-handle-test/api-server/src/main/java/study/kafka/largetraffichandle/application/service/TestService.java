@@ -11,7 +11,9 @@ class TestService implements TestUseCase {
   @Override
   public void calculate() {
     log.info("계산을 시작합니다.");
-    for (long i = 0; i <= 3000000000L; i++) { }
+    try {
+      Thread.sleep(500);
+    } catch (Exception ignored) { }
     log.info("계산을 완료했습니다.");
   }
 }

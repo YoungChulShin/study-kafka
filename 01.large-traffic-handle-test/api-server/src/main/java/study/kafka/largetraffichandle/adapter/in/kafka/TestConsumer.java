@@ -23,6 +23,6 @@ public class TestConsumer {
   )
   public void handleMessage(ConsumerRecord<String, String> record) {
     testUseCase.calculate();
-    log.info("Message receive successfully. data: " + record.value());
+    log.info("[" + record.partition() + "] Message receive successfully. data: " + record.value());
   }
 }

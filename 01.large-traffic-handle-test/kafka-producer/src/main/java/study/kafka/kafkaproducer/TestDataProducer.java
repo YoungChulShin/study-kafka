@@ -1,11 +1,9 @@
 package study.kafka.kafkaproducer;
 
-import java.util.concurrent.CompletableFuture;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -21,7 +19,7 @@ public class TestDataProducer implements CommandLineRunner {
   public void run(String... args) throws Exception {
     for (int i = 0; i < TEST_COUNT; i++) {
       String data = "test-" + i;
-      kafkaTemplate.send(TEST_TOPIC, data)
+      kafkaTemplate.send(TEST_TOPIC, String.valueOf(i), data)
           .thenApply(sendResult -> {
             if (sendResult.getRecordMetadata() != null) {
               // 메시지 전송 성공
